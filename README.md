@@ -14,16 +14,16 @@ The parameters should be first set in `params.py`.
 
 * Generate simulation data
 
-Run `1_Data_generation.ipynb` to generate simulation data, the output data are saved in `data/`.
+Run `0_Data_generation.ipynb` to generate simulation data, the output data are saved in `data/`.
 
 *  Run the offline component of the algorithm
 
-Depending on the candidate approach you choose, you can run `2_Offline_component_SEP.ipynb`/`2_Offline_component_SHR.ipynb`/`2_Offline_component_SHR_CLUSTER.ipynb`/`2_Offline_component_SHR_ROBUST.ipynb`/`2_Offline_component_SHR_FULL.ipynb` to get the results of offline component. The output is saved in `results/`.
+Depending on the candidate approach you choose, you can run `1_Offline_component_SEP.ipynb`/`1_Offline_component_SHR.ipynb`/`1_Offline_component_SHR_CLUSTER.ipynb`/`1_Offline_component_SHR_ROBUST.ipynb`/`1_Offline_component_SHR_FULL.ipynb` to get the results of offline component. The output is saved in `results/`.
 
 *  Run the online component of the algorithm
 
-Depending on the candidate approach you choose, you can run `3_Online_component_SEP.ipynb`/`3_Online_component_SHR.ipynb`/`3_Online_component_SHR_CLUSTER.ipynb`/`3_Online_component_SHR_ROBUST.ipynb`/`3_Online_component_SHR_FULL.ipynb` to get the results of offline component. The output is saved in `results/`.
+Depending on the candidate approach you choose, you can run `2_Online_component_SEP.ipynb`/`2_Online_component_SHR.ipynb`/`2_Online_component_SHR_CLUSTER.ipynb`/`2_Online_component_SHR_ROBUST.ipynb`/`2_Online_component_SHR_FULL.ipynb` to get the results of offline component. The output is saved in `results/`.
 
 *  Compare and evaluate different approaches
 
-First run `4_Calculate_OPTIMIZE.ipynb` to get the optimal solution, then run `4_Evaluate.ipynb` to calculate evaluation metrics.
+First run `3_Calculate_OPTIMIZE.ipynb` to get the optimal solution, then run `3_Evaluate.ipynb` to calculate evaluation metrics.
