@@ -8,7 +8,7 @@ def set_seed(seed):
     random.seed(seed)
 
 # solve the Lagrange multiplier for the shared-budget constraint setting
-def solve_largrange_multiplier(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, eta, B, r):
+def solve_largrange_multiplier(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, B, r):
     
     # initial minimum value
     lambda_left = 0
@@ -32,7 +32,7 @@ def solve_largrange_multiplier(N, pred_prob, fare, compensation, passenger_incen
                 for j in range(0, len(driver_incentive_list)):
                     c = (pred_prob[n,i,j] - r)
                     h = (pred_prob[n,i,j] + r)*(fare[n]*passenger_incentive_list[i]+compensation[n]*driver_incentive_list[j])
-                    if eta*fare[n]*(1-passenger_incentive_list[i]) < compensation[n]*(1+driver_incentive_list[j]):
+                    if fare[n]*(1-passenger_incentive_list[i]) > compensation[n]*(1+driver_incentive_list[j]):
                         if c - lambda_mid * h > l_best:
                             l_best = c - lambda_mid * h
                             h_best = h
@@ -48,7 +48,7 @@ def solve_largrange_multiplier(N, pred_prob, fare, compensation, passenger_incen
     return lambda_mid
 
 # solve the Lagrange multiplier when only passenger-side budget exists
-def solve_largrange_multiplier_only_passenger(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, eta, B):
+def solve_largrange_multiplier_only_passenger(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, B):
     
     lambda_left = 0
     lambda_right = 1/(min(fare)*passenger_incentive_list[1])
@@ -69,7 +69,7 @@ def solve_largrange_multiplier_only_passenger(N, pred_prob, fare, compensation, 
             for i in range(0, len(passenger_incentive_list)):
                 c = pred_prob[n,i,j]
                 h = pred_prob[n,i,j]*(fare[n]*passenger_incentive_list[i]+compensation[n]*driver_incentive_list[j])
-                if eta*fare[n]*(1-passenger_incentive_list[i]) < compensation[n]*(1+driver_incentive_list[j]):
+                if fare[n]*(1-passenger_incentive_list[i]) > compensation[n]*(1+driver_incentive_list[j]):
                     if c - lambda_mid * h > l_best:
                         l_best = c - lambda_mid * h
                         h_best = h
@@ -85,7 +85,7 @@ def solve_largrange_multiplier_only_passenger(N, pred_prob, fare, compensation, 
     return lambda_mid
 
 # solve the Lagrange multiplier when only driver-side budget exists
-def solve_largrange_multiplier_only_driver(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, eta, B):
+def solve_largrange_multiplier_only_driver(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, B):
     
     lambda_left = 0
     lambda_right = 1/(min(compensation)*driver_incentive_list[1])
@@ -106,7 +106,7 @@ def solve_largrange_multiplier_only_driver(N, pred_prob, fare, compensation, pas
             for j in range(0, len(driver_incentive_list)):
                 c = pred_prob[n,i,j]
                 h = pred_prob[n,i,j]*(fare[n]*passenger_incentive_list[i]+compensation[n]*driver_incentive_list[j])
-                if eta*fare[n]*(1-passenger_incentive_list[i]) < compensation[n]*(1+driver_incentive_list[j]):
+                if fare[n]*(1-passenger_incentive_list[i]) > compensation[n]*(1+driver_incentive_list[j]):
                     if c - lambda_mid * h > l_best:
                         l_best = c - lambda_mid * h
                         h_best = h
@@ -122,7 +122,7 @@ def solve_largrange_multiplier_only_driver(N, pred_prob, fare, compensation, pas
     return lambda_mid
 
 # solve the Lagrange multiplier when giving the seperate budget constraint setting (both the passenger-side budget and the driver-side budget exist)
-def solve_largrange_multiplier_sep(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, eta, B, passenger_percentage):
+def solve_largrange_multiplier_sep(N, pred_prob, fare, compensation, passenger_incentive_list, driver_incentive_list, B, passenger_percentage):
     
     def subproblem_optimization(lambda_1, lambda_2):
         
@@ -137,7 +137,7 @@ def solve_largrange_multiplier_sep(N, pred_prob, fare, compensation, passenger_i
                     c = pred_prob[n,i,j]
                     h_1 = pred_prob[n,i,j]*fare[n]*passenger_incentive_list[i]
                     h_2 = pred_prob[n,i,j]*compensation[n]*driver_incentive_list[j]
-                    if eta*fare[n]*(1-passenger_incentive_list[i]) < compensation[n]*(1+driver_incentive_list[j]):
+                    if fare[n]*(1-passenger_incentive_list[i]) > compensation[n]*(1+driver_incentive_list[j]):
                         if c - lambda_1 * h_1 - lambda_2 * h_2 > l_best:
                             l_best = c - lambda_1 * h_1 - lambda_2 * h_2
                             h_1_best = h_1
