@@ -4,7 +4,7 @@ This is the demo code of the paper **Two-Sided Instant Incentive Optimization un
 
 ## Dataset
 
-In the numerical experiment section of our paper, we use the real data as input, which are restricted to access inside Meituan. Here we generate some "fake" data to run the code.
+In the numerical experiment section of our paper, we use the real data as input, which are restricted to access inside Meituan. Here we generate some demo data to run the code.
 
 ## Usage
 
